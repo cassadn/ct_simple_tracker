@@ -3,11 +3,46 @@
 <head>
   <title>CT Report Dashboard</title>
   <style>
-    /* Centering the h1 text */
+/* body {
+      margin: 0;
+      padding: 0;
+      Set background properties 
+      background-image: url('truplan.png');  Replace 'path/to/your/image.jpg' with your image path 
+      background-size: cover;  Cover the entire background 
+      background-repeat: no-repeat;  Prevent background image from repeating 
+      background-attachment: fixed;  Fix the background when scrolling 
+    } */
+
     h1 {
       text-align: center;
     }
-    
+    h2 {
+      text-align: center;
+    }
+    /* Styles for the container holding QR code and link */
+    .qr-code-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    #QRCode {
+      width: 150px; /* Adjust the width as needed */
+      height: auto; /* Let the height adjust proportionally */
+    }
+
+    #form-link {
+      margin-left: 50px; /* Add space between QR code and link */
+    }
+
+    /* Container for the table */
+    .table-container {
+      background-color: rgba(255, 255, 255, 0.9); /* White background with transparency */
+      padding: 20px;
+      /* Other styles */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Add shadow to the container */
+    }
     .excel-table {
       border-collapse: collapse;
       width: 100%;
@@ -24,6 +59,17 @@
 </head>
 <body>
   <h1>CT Report Status</h1>
+  <h2>Click or scan below to access the CT request form:</h2>
+  <!-- Container for QR code and link -->
+  <div class="qr-code-container">
+    <!-- Displaying the QR code -->
+    <img id="QRCode" src="QRCode.png" alt="QR Code for Microsoft Form">
+
+    <!-- Displaying the link to the Microsoft Form -->
+    <div id="form-link">
+      <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=g7S4tZdV50qOJ_zEZKO1hPowGAqzeyVJn6Du9jl_JdtURjNSTkhMRDhJVDRRV0lTNk9JSFZQRlA0My4u">Link to Form</a>
+    </div>
+  </div>
 
   <div>
     <label for="filter-dropdown">Filter by WCS Email:</label>
@@ -32,7 +78,7 @@
     </select>
   </div>
 
-  <div id="table-container"></div>
+  <div class="table-container" id="table-container"></div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.3/xlsx.full.min.js"></script>
   <script src="script.js"></script>
