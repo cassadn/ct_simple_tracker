@@ -1,0 +1,42 @@
+h1 {
+    text-align: center;
+  }
+  h2 {
+    text-align: center;
+  }
+  /* Styles for the container holding QR code and link */
+  .qr-code-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+
+  #QRCode {
+    width: 150px; /* Adjust the width as needed */
+    height: auto; /* Let the height adjust proportionally */
+  }
+
+  #form-link {
+    margin-left: 50px; /* Add space between QR code and link */
+  }
+
+  /* Container for the table */
+  .table-container {
+    background-color: rgba(255, 255, 255, 0.9); /* White background with transparency */
+    padding: 20px;
+    /* Other styles */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Add shadow to the container */
+  }
+  .excel-table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  .excel-table th, .excel-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  .excel-table th {
+    background-color: #f2f2f2;
+  }
