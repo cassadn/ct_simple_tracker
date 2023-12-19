@@ -40,3 +40,12 @@ h1 {
   .excel-table th {
     background-color: #f2f2f2;
   }
+body {
+    background-image: url('watchman_background.png');
+    /* Other background properties (optional) */
+    background-size: cover; /* Adjust this as needed */
+    background-repeat: no-repeat;
+    height: 97vh; /* Sets the body height to 100% of the viewport height */
+    margin: 0; /* Removes default margin */
+    padding: 0; /* Removes default padding */
+    }
