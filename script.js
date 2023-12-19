@@ -67,7 +67,7 @@ function displayDataInTable(data, headers) {
       // Skip the iteration to avoid displaying the header row as regular data
       return;
     }
-    if (index === 0 || rowData[emailColumnIndex] === previousSelectedEmail || previousSelectedEmail === 'all') {
+    if (index === 0 || rowData[0] === previousSelectedEmail || previousSelectedEmail === 'all') {
       const row = document.createElement('tr');
       headers.forEach(header => {
         const cellData = rowData[headers.indexOf(header)];
