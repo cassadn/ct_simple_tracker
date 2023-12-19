@@ -59,7 +59,7 @@ function displayDataInTable(data, headers) {
   table.appendChild(headerRow);
 
   // Find the index of the 'WCS Email' column
-  const emailColumnIndex = headers.indexOf('WCS Email');
+  // const emailColumnIndex = headers.indexOf('WCS Email');
 
   // Filter and display data based on selectedEmail
   data.forEach((rowData, index) => {
@@ -69,9 +69,12 @@ function displayDataInTable(data, headers) {
     }
     if (index === 0 || rowData[emailColumnIndex] === previousSelectedEmail || previousSelectedEmail === 'all') {
       const row = document.createElement('tr');
-      rowData.forEach(cellData => {
+      headers.forEach(header => {
+        const cellData = rowData[headers.indexOf(header)];
         const td = document.createElement('td');
-        td.textContent = parseCellData(cellData);
+        // Handle blank cells individually
+        const cellValue = cellData !== null ? parseCellData(cellData) : 'No Data'; // Placeholder for blank cells
+        td.textContent = cellValue;
         row.appendChild(td);
       });
       table.appendChild(row);
@@ -96,7 +99,7 @@ function parseCellData(cellData) {
   }
 
   // If no conversion needed, return the original cell data
-  return cellData !== null ? cellData : '-';
+  return cellData ;
 }
 
 // Function to populate dropdown menu with unique email values
