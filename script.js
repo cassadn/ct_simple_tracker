@@ -3,7 +3,7 @@ let previousSelectedEmail = 'all';
 // Function to check for updates and display data with filter
 function checkForUpdatesAndDisplayWithFilter(selectedEmail) {
   console.log('Checking for updates and displaying data with filter...');
-  fetch('ct_ops_workup_tracker.xlsx')
+  fetch('ct_ops_tracker/ct_ops_workup_tracker.xlsx')
     .then(response => response.arrayBuffer())
     .then(data => {
       const workbook = XLSX.read(data, { type: 'array' });
@@ -72,34 +72,50 @@ function displayDataInTable(data, headers) {
       headers.forEach(header => {
         const cellData = rowData[headers.indexOf(header)];
         const td = document.createElement('td');
-        // Handle blank cells individually
-        const cellValue = cellData !== null ? parseCellData(cellData) : 'No Data'; // Placeholder for blank cells
-        td.textContent = cellValue;
-        row.appendChild(td);
-      });
-      table.appendChild(row);
-    }
-  });
+        // Convert 'WCS Email' column to lowercase
+        if (header === 'WCS Email') {
+          const lowerCaseEmail = cellData.toLowerCase();
+          td.textContent = lowerCaseEmail;
+        }  else {
+        // For other columns, perform date conversion or display data as needed
+          const cellValue = cellData !== null ? parseCellData(cellData, header) : 'No Data'; // Placeholder for blank cells
+          td.textContent = cellValue;
+      }
+      row.appendChild(td);
+    });
+    table.appendChild(row);
+  }
+});
   
   tableContainer.appendChild(table);
 }
 
-// Function to parse and convert cell data if needed
-function parseCellData(cellData) {
-  // Perform data conversion here if necessary
-  // Example conversion for Excel date serial number to formatted date
-  if (!isNaN(Date.parse(cellData))) {
-    const excelSerialDate = cellData;
-    const date = new Date((excelSerialDate - 25568) * 86400 * 1000);
+function parseCellData(cellData, header) {
+  const dateColumns = ['Submission Date', 'Procedure Date'];
 
-    if (!isNaN(date.getTime())) {
-      const formattedDate = ("0" + (date.getMonth() + 1)).slice(-2) + '/' + ("0" + date.getDate()).slice(-2) + '/' + date.getFullYear().toString().slice(-2);
-      return formattedDate;
+  if (dateColumns.includes(header)) {
+    // Convert decimal numbers to integers before date conversion
+    if (!isNaN(cellData)) {
+      if (Number.isInteger(cellData)) {
+        // Convert whole numbers to dates
+        const excelSerialDate = cellData;
+        const date = new Date((excelSerialDate - 25568) * 86400 * 1000); // Adjust for Excel's date origin
+
+        if (!isNaN(date.getTime())) {
+          const formattedDate = ("0" + (date.getMonth() + 1)).slice(-2) + '/' + ("0" + date.getDate()).slice(-2) + '/' + date.getFullYear().toString().slice(-2);
+          return formattedDate;
+        }
+      } else {
+        // Handle decimal numbers here, if necessary
+        // For example, you might want to round the decimal to the nearest whole number
+        const roundedDate = Math.round(cellData);
+        return parseCellData(roundedDate, header); // Re-run the function with the rounded integer value
+      }
     }
   }
 
-  // If no conversion needed, return the original cell data
-  return cellData ;
+  // For non-date columns or if conversion is not required, return the original cell data
+  return cellData;
 }
 
 // Function to populate dropdown menu with unique email values
