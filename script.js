@@ -3,7 +3,7 @@ let previousSelectedEmail = 'all';
 // Function to check for updates and display data with filter
 function checkForUpdatesAndDisplayWithFilter(selectedEmail) {
   console.log('Checking for updates and displaying data with filter...');
-  fetch('ct_ops_tracker/ct_ops_workup_tracker.xlsx')
+  fetch('ct_ops_workup_tracker.xlsx')
     .then(response => response.arrayBuffer())
     .then(data => {
       const workbook = XLSX.read(data, { type: 'array' });
