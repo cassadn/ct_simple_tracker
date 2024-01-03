@@ -118,7 +118,7 @@ function parseCellData(cellData, header) {
   return cellData;
 }
 
-// Function to populate dropdown menu with unique email values
+// Function to populate dropdown menu with unique lowercase email values
 function populateDropdown(emails, selectedEmail) {
   const dropdown = document.getElementById('filter-dropdown');
   dropdown.innerHTML = ''; // Clear previous options
@@ -128,15 +128,24 @@ function populateDropdown(emails, selectedEmail) {
   allOption.textContent = 'All';
   dropdown.appendChild(allOption);
 
+  const uniqueLowerCaseEmails = new Set(); // Store unique lowercase emails
+
   emails.forEach(email => {
+    const lowerCaseEmail = email.toLowerCase(); // Convert email to lowercase
+    uniqueLowerCaseEmails.add(lowerCaseEmail); // Add lowercase email to the set
+  });
+
+  // Add unique lowercase emails to the dropdown
+  uniqueLowerCaseEmails.forEach(email => {
     const option = document.createElement('option');
     option.value = email;
     option.textContent = email;
     dropdown.appendChild(option);
   });
 
-  // Set the selectedEmail in the dropdown if it was previously selected, otherwise set it to 'All'
-  dropdown.value = selectedEmail !== 'all' && emails.includes(selectedEmail) ? selectedEmail : 'all';
+  // Set the selectedEmail in the dropdown if it was previously selected, otherwise set it to 'all'
+  const lowerCaseSelectedEmail = selectedEmail !== 'all' ? selectedEmail.toLowerCase() : 'all';
+  dropdown.value = lowerCaseSelectedEmail;
 
   dropdown.addEventListener('change', function () {
     const selectedEmail = this.value;
