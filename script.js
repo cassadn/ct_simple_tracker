@@ -10,10 +10,9 @@ function checkForUpdatesAndDisplayWithFilter(selectedEmail) {
       const sheetName = workbook.SheetNames[0];
       const sheet = workbook.Sheets[sheetName];
       const tableData = XLSX.utils.sheet_to_json(sheet, { header: 1 });
-
+      console.log(tableData)
       const emailColumnIndex = 0;
       const uniqueEmails = [...new Set(tableData.slice(1).map(row => row[emailColumnIndex]))];
-      
       // Display all data by default if 'All' is selected or no filter selected
       if (selectedEmail === 'all' || selectedEmail === null || selectedEmail === undefined) {
         displayDataInTable(tableData, tableData[0]); // Change: Display all data initially
@@ -31,7 +30,6 @@ function checkForUpdatesAndDisplayWithFilter(selectedEmail) {
         // Display filtered data for the selected email
         console.log('displayed data:', displayDataInTable(filteredData, filteredData[0]));
       }
-
       populateDropdown(uniqueEmails, selectedEmail); // Pass selectedEmail to maintain dropdown state
     })
     .catch(error => {
@@ -52,17 +50,15 @@ function displayDataInTable(data, headers) {
   // Create table headers
   headers.forEach(headerText => {
     if (headerText === 'Workup by') {
-    return;
-  } else {
-    const th = document.createElement('th');
+      return;
+    }
+    else {const th = document.createElement('th');
     th.textContent = headerText;
     headerRow.appendChild(th);
+  }
+    
   });
-
   table.appendChild(headerRow);
-
-  // Find the index of the 'WCS Email' column
-  // const emailColumnIndex = headers.indexOf('WCS Email');
 
   // Filter and display data based on selectedEmail
   data.forEach((rowData, index) => {
@@ -80,12 +76,12 @@ function displayDataInTable(data, headers) {
           const lowerCaseEmail = cellData.toLowerCase();
           td.textContent = lowerCaseEmail;
         } else if (header === 'Workup by'){
-            return;
-        } else if (header === 'Additional WCS to email' && cellData !== null && cellData !== undefined) {
+          return;
+        } else if (header === 'Additional WCS to email' && cellData !== null && cellData !== undefined){
           const lowerCaseAdEmail = cellData.toLowerCase();
           td.textContent = lowerCaseAdEmail;
-        } else {
-          // For other columns, perform date conversion or display data as needed
+        }  else {
+        // For other columns, perform date conversion or display data as needed
           const cellValue = cellData !== null ? parseCellData(cellData, header) : 'No Data'; // Placeholder for blank cells
           td.textContent = cellValue;
       }
@@ -94,7 +90,6 @@ function displayDataInTable(data, headers) {
     table.appendChild(row);
   }
 });
-  
   tableContainer.appendChild(table);
 }
 
@@ -135,12 +130,12 @@ function populateDropdown(emails, selectedEmail) {
   allOption.value = 'all';
   allOption.textContent = 'All';
   dropdown.appendChild(allOption);
-
   const uniqueLowerCaseEmails = new Set(); // Store unique lowercase emails
-
   emails.forEach(email => {
-    const lowerCaseEmail = email.toLowerCase(); // Convert email to lowercase
-    uniqueLowerCaseEmails.add(lowerCaseEmail); // Add lowercase email to the set
+    if (email !== undefined){
+      const lowerCaseEmail = email.toLowerCase(); // Convert email to lowercase
+      uniqueLowerCaseEmails.add(lowerCaseEmail); // Add lowercase email to the set
+    }
   });
 
   // Add unique lowercase emails to the dropdown
