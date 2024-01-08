@@ -1,9 +1,12 @@
 WCS Email,Intelegrid Number,Submission Date,Procedure Date,Workup by,Additional WCS to email,Status,Email Sent
-austin.lange@bsci.com,12345678,2024-11-07 00:00:00,2023-11-27,AC,,complete,Yes
-nathan.cassady@bsci.com,87654321,2024-09-16 00:00:00,2023-11-29,AC,,complete,Yes
-nathan.cassady@bsci.com,97654321,2023-10-13 00:00:00,2023-11-23,AC,,in progress,No
-nathan.cassady@bsci.com,76543279,2024-10-19 00:00:00,2023-11-27,AL,,complete,Yes
-Nathan.Cassady@bsci.com,23456789,2024-01-02 20:48:34,2024-02-07,NC,,complete,Yes
-Cory.Swingen@bsci.com,30518109,2024-01-03 16:52:38,2024-01-05,NC,,queue,No
-Nathan.Cassady@bsci.com,30056970,2024-01-03 21:26:00,2025-01-01,,"Nathan.Cassady@bsci.com, Austin.Caldwell@bsci.com",queue,No
-Nathan.Cassady@bsci.com,30561879,2024-01-04 13:50:24,2025-02-05,,"nathan.cassady@bsci.com, nathan.cassady@bsci.com",queue,No
+austin.lange@bsci.com,12345678.0,2024-11-07 00:00:00,2023-11-27,AC,,complete,Yes
+nathan.cassady@bsci.com,87654321.0,2024-09-16 00:00:00,2023-11-29,AC,,complete,Yes
+nathan.cassady@bsci.com,97654321.0,2023-10-13 00:00:00,2023-11-23,AC,,complete,Yes
+Cory.Swingen@bsci.com,30518109.0,2024-01-03 16:52:38,2024-01-05,NC,,complete,Yes
+Nathan.Cassady@bsci.com,30056970.0,2024-01-03 21:26:00,2025-01-01,,"Nathan.Cassady@bsci.com, Austin.Caldwell@bsci.com",complete,Yes
+Nathan.Cassady@bsci.com,30561879.0,2024-01-04 13:50:24,2025-02-05,NC,"nathan.cassady@bsci.com, nathan.cassady@bsci.com",complete,Yes
+Nathan.Cassady@bsci.com,36936936.0,2024-01-08 16:29:34,2024-01-17,,austin.caldwell@bsci.COM,in progress,No
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,, ,
