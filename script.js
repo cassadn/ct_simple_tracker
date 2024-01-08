@@ -2,7 +2,7 @@ let previousSelectedEmail = 'all';
 
 // Function to check for updates and display data with filter
 function checkForUpdatesAndDisplayWithFilter(selectedEmail) {
-  console.log('Checking for updates and displaying data with filter...');
+  console.log('Checking for updates and displaying data with filter...', new Date());
   fetch('ct_ops_workup_tracker.xlsx')
     .then(response => response.arrayBuffer())
     .then(data => {
@@ -67,17 +67,22 @@ function displayDataInTable(data, headers) {
       // Skip the iteration to avoid displaying the header row as regular data
       return;
     }
-    if (index === 0 || rowData[0] === previousSelectedEmail || previousSelectedEmail === 'all') {
+    if (index === 0 || rowData[0] !== undefined) {
       const row = document.createElement('tr');
       headers.forEach(header => {
         const cellData = rowData[headers.indexOf(header)];
         const td = document.createElement('td');
-        // Convert 'WCS Email' column to lowercase
-        if (header === 'WCS Email') {
+        // Convert 'WCS Email' and 'Additional WCS to email' column to lowercase and skip the 'Workup by' column
+        if (header === 'WCS Email' && cellData !== undefined) {
           const lowerCaseEmail = cellData.toLowerCase();
           td.textContent = lowerCaseEmail;
-        }  else {
-        // For other columns, perform date conversion or display data as needed
+        } else if (header === 'Workup by'){
+            return;
+        } else if (header === 'Additional WCS to email' && cellData !== null && cellData !== undefined) {
+          const lowerCaseAdEmail = cellData.toLowerCase();
+          td.textContent = lowerCaseAdEmail;
+        } else {
+          // For other columns, perform date conversion or display data as needed
           const cellValue = cellData !== null ? parseCellData(cellData, header) : 'No Data'; // Placeholder for blank cells
           td.textContent = cellValue;
       }
