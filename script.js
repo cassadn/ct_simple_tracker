@@ -51,6 +51,9 @@ function displayDataInTable(data, headers) {
 
   // Create table headers
   headers.forEach(headerText => {
+    if (headerText === 'Workup by') {
+    return;
+  } else {
     const th = document.createElement('th');
     th.textContent = headerText;
     headerRow.appendChild(th);
